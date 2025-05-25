@@ -4,10 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import HelloWorld from './Greeting.jsx'
 import NewComponent from './NewComponent.jsx'
+import AnimalList from './AnimalList.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelloWorld />
     <NewComponent />
+    <AnimalList />
   </StrictMode>,
 )
