@@ -10,6 +10,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelloWorld />
     <NewComponent />
-    <AnimalList />
+    <App />
   </StrictMode>,
 )

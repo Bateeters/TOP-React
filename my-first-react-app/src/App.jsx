@@ -3,6 +3,36 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+function List(props) {
+  return (
+    <>
+      {!props.animals ? (
+        <div>Loading...</div>
+      ) : props.animals.length > 0 ? (
+        <ul>
+          {props.animals.map((animal) => {
+            return <li key={animal}>{animal}</li>;
+          })}
+        </ul>
+      ) : (
+        <div>There are no animals in the list!</div>
+      )}
+    </>
+  );
+}
+
+function App() {
+  const animals = ["Lion","Cat","Dog"];
+
+  return (
+    <div>
+      <h1>Animals: </h1>
+      <List animals={animals} />
+    </div>
+  );
+} 
+
+/*
 function App() {
   const [count, setCount] = useState(0)
 
@@ -28,8 +58,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+      <h1>Animals: </h1>
+      <List animals={animals} />
+      </div>
     </>
   )
 }
+*/
 
 export default App
