@@ -1,70 +1,72 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function List(props) {
+function Person() {
+  const [person, setPerson] = useState({
+    firstName: "John",
+    lastName: "Doe",
+    age: 100
+  });
+
+  const handleInputChange = (e) => {
+    console.log(person);
+    const { name, value } = e.target;
+    setPerson((prevPerson) => ({
+      ...prevPerson,
+      [name]: value,
+    }));
+  };
+
+  const handleIncreaseAge = () => {
+    console.log("in handleIncreaseAge (before setPerson call): ", person);
+    setPerson((prevPerson) => ({
+      ...person, 
+      age: parseInt(prevPerson.age) + 1
+    }));
+    // we've called setPerson, surely person has updated?
+    console.log("in handleIncreaseAge (after setPerson call): ", person);
+  };
+
+  // this console.log runs every time the component renders
+  // what do you think this will print?
+  console.log("during render: ", person);
+
   return (
     <>
-      {!props.animals ? (
-        <div>Loading...</div>
-      ) : props.animals.length > 0 ? (
-        <ul>
-          {props.animals.map((animal) => {
-            return <li key={animal}>{animal}</li>;
-          })}
-        </ul>
-      ) : (
-        <div>There are no animals in the list!</div>
-      )}
+      <input
+        type="text"
+        name="firstName"
+        value={person.firstName}
+        onChange={handleInputChange}
+        placeholder="First Name"
+      />
+      <input
+        type="text"
+        name="lastName"
+        value={person.lastName}
+        onChange={handleInputChange}
+        placeholder="Last Name"
+      />
+      <input
+        type="number"
+        name="age"
+        value={person.age}
+        onChange={handleInputChange}
+        placeholder="Age"
+      />
+      <h1>{person.firstName} {person.lastName}</h1>
+      <h2>{person.age}</h2>
+      <button onClick={handleIncreaseAge}>Increase age</button>
     </>
   );
 }
 
 function App() {
-  const animals = ["Lion","Cat","Dog"];
-
   return (
     <div>
-      <h1>Animals: </h1>
-      <List animals={animals} />
+      <Person />
     </div>
   );
 } 
-
-/*
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <div>
-      <h1>Animals: </h1>
-      <List animals={animals} />
-      </div>
-    </>
-  )
-}
-*/
 
 export default App
